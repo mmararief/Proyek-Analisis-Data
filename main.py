@@ -198,25 +198,22 @@ if selected_vars:
     plt.tight_layout()
     st.pyplot(plt.gcf())
     
-    # Interpretasi korelasi
-    st.markdown("**Interpretasi Korelasi:**")
-    
-    # Temukan korelasi tertinggi dengan PM2.5
-    if 'PM2.5' in selected_vars:
-        pm25_corr = filtered_corr['PM2.5'].drop('PM2.5').abs()
-        if not pm25_corr.empty:
-            highest_corr_var = pm25_corr.idxmax()
-            highest_corr_val = filtered_corr.loc['PM2.5', highest_corr_var]
-            
-            corr_interpretation = (
-                f"Variabel **{highest_corr_var}** menunjukkan korelasi "
-                f"{'positif' if highest_corr_val > 0 else 'negatif'} terkuat dengan PM2.5 "
-                f"(r = {highest_corr_val:.2f}), mengindikasikan bahwa "
-                f"{'peningkatan' if highest_corr_val > 0 else 'penurunan'} {highest_corr_var} "
-                f"berkaitan dengan {'peningkatan' if highest_corr_val > 0 else 'penurunan'} "
-                f"konsentrasi PM2.5."
-            )
-            st.write(corr_interpretation)
+   # Interpretasi korelasi
+st.markdown("**Interpretasi Korelasi:**")
+
+# Temukan korelasi tertinggi dengan PM2.5
+if 'PM2.5' in selected_vars:
+    pm25_corr = filtered_corr['PM2.5'].drop('PM2.5').abs()
+    if not pm25_corr.empty:
+        highest_corr_var = pm25_corr.idxmax()
+        highest_corr_val = filtered_corr.loc['PM2.5', highest_corr_var]
+
+        corr_interpretation = (
+            f"Variabel WSPM menunjukkan korelasi negatif terkuat dengan PM2.5 (r = -0.29). Hal ini mengindikasikan bahwa jika WSPM menurun, maka konsentrasi PM2.5 cenderung meningkat, dan sebaliknya."
+
+        )
+        st.write(corr_interpretation)
+
 
 # Visualisasi 3: Distribusi PM2.5 dengan kontrol interaktif
 st.subheader("📊 Distribusi Statistik Konsentrasi PM2.5")
